@@ -1,0 +1,90 @@
+# Council configuration
+# Copy to ~/.cursor/skills/llm-council/council.config.yaml on install
+# Or place at .cursor/council.config.yaml in a project to override
+
+version: 1
+
+default_tier: standard
+default_mode: standard
+supervisor_enabled: true
+transcript_dir: .cursor/council-sessions
+
+members:
+  devils_advocate:
+    model: claude-opus-4-8-thinking-high
+    fallback:
+      - claude-4.6-opus-high-thinking
+      - claude-opus-4-7-thinking-xhigh
+  architect:
+    model: gemini-3.1-pro
+    fallback:
+      - gemini-3.5-flash
+      - claude-sonnet-5-thinking-high
+  pragmatist:
+    model: gpt-5.4-medium
+    fallback:
+      - gpt-5.2
+      - composer-2.5-fast
+  security:
+    model: claude-sonnet-5-thinking-high
+    fallback:
+      - gpt-5.4-medium
+      - gemini-3-flash
+  product:
+    model: grok-4.3
+    fallback:
+      - gpt-5.4-medium
+
+supervisor:
+  model: claude-4.6-opus-high-thinking
+  fallback:
+    - claude-opus-4-8-thinking-high
+
+red_team:
+  model: claude-opus-4-8-thinking-high
+  fallback:
+    - claude-4.6-opus-high-thinking
+
+tiers:
+  budget:
+    devils_advocate: gemini-3-flash
+    architect: gpt-5-mini
+    pragmatist: composer-2.5-fast
+    security: gemini-3-flash
+    product: gpt-5-mini
+    supervisor: gpt-5.4-medium
+    red_team: gemini-3-flash
+  standard:
+    devils_advocate: claude-opus-4-8-thinking-high
+    architect: gemini-3.1-pro
+    pragmatist: gpt-5.4-medium
+    security: claude-sonnet-5-thinking-high
+    product: grok-4.3
+    supervisor: claude-4.6-opus-high-thinking
+    red_team: claude-opus-4-8-thinking-high
+  premium:
+    devils_advocate: claude-opus-4-8-thinking-high
+    architect: gemini-3.1-pro
+    pragmatist: gpt-5.5-medium
+    security: claude-4.6-opus-high-thinking
+    product: grok-4.3
+    supervisor: claude-opus-4-8-thinking-high
+    red_team: claude-opus-4-8-thinking-high
+
+scoring_weights:
+  feasibility: 0.25
+  security: 0.25
+  value: 0.20
+  maintainability: 0.15
+  cost: 0.15
+
+sensitive_file_blocklist:
+  - ".env"
+  - ".env.*"
+  - "**/*credentials*"
+  - "**/*secret*"
+  - "**/*.pem"
+  - "**/*.key"
+  - "**/id_rsa*"
+  - "**/.aws/**"
+  - "**/serviceAccountKey.json"
