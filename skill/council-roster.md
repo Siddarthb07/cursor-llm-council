@@ -2,6 +2,8 @@
 
 Default members, models, and selection rules. Override via `--tier` flag or `council.config.yaml` (v0.2).
 
+Model IDs below must match slugs available in **your** Cursor agent model catalog (they vary by plan and version).
+
 ## Model Tiers
 
 ### Budget (`--tier=budget`)
